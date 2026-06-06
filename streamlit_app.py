@@ -52,14 +52,12 @@ st.markdown("""
     
     /* Info Box */
     .info-box {
-        background-color: {warna_bg}; 
-        border: 2px solid rgba(0,0,0,0.1); 
-        border-radius: 12px; 
-        padding: 15px; 
-        text-align: center; 
-        margin-bottom: 15px;
-        box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
-        color: #4A3E56;
+        background: rgba(255, 182, 217, 0.15);
+        border: 2px solid #ffb6d9;
+        border-radius: 15px;
+        padding: 25px;
+        margin: 20px 0;
+        box-shadow: 0 4px 15px rgba(255, 107, 157, 0.1);
     }
 </style>
 """, unsafe_allow_html=True)
