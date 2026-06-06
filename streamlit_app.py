@@ -10,6 +10,14 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+# ==============================================================================
+# SISTEM DETEKSI KLIK (Menangkap Simbol Unsur dari URL)
+# ==============================================================================
+if "element" in st.query_params:
+    st.session_state.active_element = st.query_params["element"]
+    # Bersihkan URL secara instan agar pop-up tidak muncul berulang kali saat refresh
+    st.query_params.clear()
+
 # Custom CSS
 st.markdown('''
 <style>
@@ -62,7 +70,7 @@ st.markdown('''
         border: 1px solid #F4C2E7;
     }
 
-    /* KOTAK UNSUR TABEL PERIODIK (Aesthetic & Modern) */
+    /* KOTAK UNSUR TABEL PERIODIK (BERWARNA & BISA DIKLIK) */
     .element-box {
         border-radius: 12px !important;
         padding: 10px !important;
@@ -81,9 +89,10 @@ st.markdown('''
     
     /* Efek Hover Membesar Sedikit */
     .element-box:hover {
-        transform: scale(1.08) !important;
+        transform: scale(1.1) !important;
         box-shadow: 0 8px 16px rgba(165, 140, 190, 0.2) !important;
         z-index: 10;
+        border: 2px solid #F4C2E7;
     }
     
     .atomic-number {
@@ -97,6 +106,7 @@ st.markdown('''
         font-size: 1.6rem !important;
         font-weight: 800 !important;
         margin: -2px 0 !important;
+        color: #4A3E56 !important;
     }
     
     .element-name {
@@ -106,6 +116,7 @@ st.markdown('''
         white-space: nowrap;
         overflow: hidden;
         width: 100%;
+        color: #4A3E56 !important;
     }
 </style>
 ''', unsafe_allow_html=True)
@@ -230,7 +241,6 @@ def show_page_beranda():
     st.write("---")
     st.markdown("### 🗂️ Informasi Proyek & Pengembang")
     
-    # PERBAIKAN DI SINI: argumen unsafe_allow_html dikeluarkan dari string
     st.markdown('''
         <div class="identity-card">
             <h4 style='margin-top:0;'>✨ Ensiklopedia Unsur Kimia</h4>
@@ -273,7 +283,6 @@ def show_element_details(element):
         st.write(f"**📏 Golongan:** {element['Group']}")
         st.write(f"**📅 Periode:** {element['Period']}")
         
-    # Paragraf Penjelasan (Kamu bisa mengubah teks ini sesuai kebutuhan)
     st.info(
         f"**{element['Name']}** ({element['Symbol']}) adalah unsur kimia dengan nomor atom **{element['AtomicNumber']}** "
         f"yang terletak pada periode {element['Period']} dan golongan {element['Group']}. "
@@ -318,12 +327,21 @@ def show_page_tabel_periodik():
                 if not match.empty:
                     element = match.iloc[0]
                     
-                    # Menggunakan native st.button agar bisa diklik
-                    # Saat diklik, panggil fungsi show_element_details
-                    if st.button(element['Symbol'], key=f"btn_{element['Symbol']}", use_container_width=True):
-                        show_element_details(element)
+                    # Ambil warna latar belakang yang sesuai dari COLOR_MAP
+                    bg_color = COLOR_MAP.get(element['Category'], '#FFFFFF')
+                    
+                    # HTML Card Interaktif (Membungkus card dengan tag link <a>)
+                    box_html = f"""
+                    <a href="?element={element['Symbol']}" target="_self" style="text-decoration: none;">
+                        <div class="element-box" style="background-color: {bg_color};">
+                            <div class="atomic-number">{element['AtomicNumber']}</div>
+                            <div class="element-symbol">{element['Symbol']}</div>
+                            <div class="element-name">{element['Name']}</div>
+                        </div>
+                    </a>
+                    """
+                    st.markdown(box_html, unsafe_allow_html=True)
                 else:
-                    # Tempat kosong untuk menjaga layout tabel
                     st.write("")
 
     st.markdown(
@@ -332,6 +350,7 @@ def show_page_tabel_periodik():
         "</center>", 
         unsafe_allow_html=True
     )
+
 # ==============================================================================
 # SISTEM KONTROL NAVIGASI MULTI-HALAMAN & SIDEBAR
 # ==============================================================================
@@ -359,3 +378,15 @@ if page_selection == "🏠 Beranda":
     show_page_beranda()
 elif page_selection == "🧪 Tabel Periodik":
     show_page_tabel_periodik()
+
+# ==============================================================================
+# PEMICU POP-UP DIALOG (Dieksekusi di akhir agar muncul di atas segalanya)
+# ==============================================================================
+if "active_element" in st.session_state and st.session_state.active_element:
+    selected_symbol = st.session_state.active_element
+    match_element = df[df['Symbol'] == selected_symbol]
+    if not match_element.empty:
+        show_element_details(match_element.iloc[0])
+    
+    # Hapus state setelah dialog ditampilkan supaya tidak tersangkut
+    st.session_state.active_element = None
