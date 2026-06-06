@@ -15,14 +15,14 @@ st.markdown(
 &lt;style&gt;
     /* Latar Belakang Utama Aplikasi */
     .stApp {
-        background: linear-gradient(135, #FFF6FB, #F3EEFF, #EAF8FF) !important;
+        background: linear-gradient(135, "#FFF6FB", "#F3EEFF", "#EAF8FF") !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
     /* Latar Belakang Sidebar */
     [data-testid="stSidebar"] {
-        background-color: #F4ECFF !important;
-        border-right: 2px dashed #DCC6FF;
+        background-color: "#F4ECFF" !important;
+        border-right: 2px dashed "#DCC6FF";
     }
     
     /* Gaya Teks Umum */
