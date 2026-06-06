@@ -204,32 +204,6 @@ else:  # Halaman Tabel Periodik
     legend_cols = st.columns(5)
     categories = list(COLOR_MAP.keys())
     
-    for idx, (simbol, data) in enumerate(unsur_data.items()):
-        kategori_unsur = data["Informasi Dasar"]["Kategori"]
-        warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-        with grid_cols[idx % 6]:
-            st.markdown(
-                f"""
-                <a href="?element={simbol}" target="_self" style="text-decoration: none;">
-                    <div style="
-                        background-color: {warna_bg}; 
-                        border: 2px solid rgba(0,0,0,0.1); 
-                        border-radius: 12px; 
-                        padding: 15px; 
-                        text-align: center; 
-                        margin-bottom: 15px;
-                        box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
-                        color: #4A3E56;
-                    ">
-                        <h2 style="margin: 0; font-size: 2rem;">{simbol}</h2>
-                        <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">{data['Informasi Dasar']['Nomor Atom']}</p>
-                        <p style="margin: 0; font-size: 0.75rem; opacity: 0.8;">{data['Informasi Dasar']['Nama']}</p>
-                    </div>
-                </a>
-                """, 
-                unsafe_allow_html=True
-            )
-            
     # --- DATASET (GOLONGAN IA & IIA) ---
     unsur_data = {
         # GOLONGAN IA
@@ -912,6 +886,33 @@ else:  # Halaman Tabel Periodik
 
     st.markdown("---")
 
+    # Buay Warna sesuai kategori
+    for idx, (simbol, data) in enumerate(unsur_data.items()):
+        kategori_unsur = data["Informasi Dasar"]["Kategori"]
+        warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
+        with grid_cols[idx % 6]:
+            st.markdown(
+                f"""
+                <a href="?element={simbol}" target="_self" style="text-decoration: none;">
+                    <div style="
+                        background-color: {warna_bg}; 
+                        border: 2px solid rgba(0,0,0,0.1); 
+                        border-radius: 12px; 
+                        padding: 15px; 
+                        text-align: center; 
+                        margin-bottom: 15px;
+                        box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
+                        color: #4A3E56;
+                    ">
+                        <h2 style="margin: 0; font-size: 2rem;">{simbol}</h2>
+                        <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">{data['Informasi Dasar']['Nomor Atom']}</p>
+                        <p style="margin: 0; font-size: 0.75rem; opacity: 0.8;">{data['Informasi Dasar']['Nama']}</p>
+                    </div>
+                </a>
+                """, 
+                unsafe_allow_html=True
+            )
+            
     # --- DETAIL UNSUR (DITAMPILKAN DI BAWAH TABEL) ---
     if st.session_state.unsur_terpilih in unsur_data:
         unsur_aktif = unsur_data[st.session_state.unsur_terpilih]
