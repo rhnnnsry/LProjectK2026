@@ -204,15 +204,31 @@ else:  # Halaman Tabel Periodik
     legend_cols = st.columns(5)
     categories = list(COLOR_MAP.keys())
     
-    for idx, cat in enumerate(categories):
-        col_idx = idx % 5
-        with legend_cols[col_idx]:
-            st.markdown(
-                f'<div style="background-color:{COLOR_MAP[cat]}; padding:6px; border-radius:8px; text-align:center; '
-                f'font-size:0.8rem; font-weight:bold; color:#4A3E56; margin-bottom:5px; border: 1px solid rgba(0,0,0,0.05);">'
-                f'{cat}</div>', 
-                unsafe_allow_html=True
-            )
+    for idx, (simbol, data) in enumerate(unsur_data.items()):
+        kategori_unsur = data["Informasi Dasar"]["Kategori"]
+        warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
+        with grid_cols[idx % 6]:
+        st.markdown(
+            f"""
+            <a href="?element={simbol}" target="_self" style="text-decoration: none;">
+                <div style="
+                    background-color: {warna_bg}; 
+                    border: 2px solid rgba(0,0,0,0.1); 
+                    border-radius: 12px; 
+                    padding: 15px; 
+                    text-align: center; 
+                    margin-bottom: 15px;
+                    box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
+                    color: #4A3E56;
+                ">
+                    <h2 style="margin: 0; font-size: 2rem;">{simbol}</h2>
+                    <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">{data['Informasi Dasar']['Nomor Atom']}</p>
+                    <p style="margin: 0; font-size: 0.75rem; opacity: 0.8;">{data['Informasi Dasar']['Nama']}</p>
+                </div>
+            </a>
+            """, 
+            unsafe_allow_html=True
+        )
             
     # --- DATASET (GOLONGAN IA & IIA) ---
     unsur_data = {
@@ -868,7 +884,6 @@ else:  # Halaman Tabel Periodik
         for i, unsur in enumerate(baris):
             with kolom[i]:
                 if unsur != "":
-                    bg_color = COLOR_MAP.get(unsur["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         # Jika unsur ada di dictionary, jadikan tombol yang bisa diklik
                         if st.button(unsur, use_container_width=True, type="primary"):
@@ -889,7 +904,6 @@ else:  # Halaman Tabel Periodik
         for i, unsur in enumerate(baris):
             with kolom[i]:
                 if unsur != "":
-                    bg_color = COLOR_MAP.get(unsur["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         if st.button(unsur, use_container_width=True, key=f"f_{unsur}", type="primary"):
                             st.session_state.unsur_terpilih = unsur
