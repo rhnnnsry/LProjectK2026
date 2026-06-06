@@ -13,7 +13,7 @@ st.set_page_config(
 
 # Custom CSS
 st.markdown(
-&lt;style&gt;
+<style>
     /* Latar Belakang Utama Aplikasi */
     .stApp {
         background: linear-gradient(135, "#FFF6FB", "#F3EEFF", "#EAF8FF") !important;
@@ -108,7 +108,7 @@ st.markdown(
         overflow: hidden;
         width: 100%;
     }
-&lt;/style&gt;
+<style>
 unsafe_allow_html=True)
 
 # DATA KATEGORI WARNA PASTEL
