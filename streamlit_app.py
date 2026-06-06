@@ -67,10 +67,12 @@ COLOR_MAP = {
     "Logam Alkali": "#FFB6C1",
     "Logam Alkali Tanah": "#FFD6A5",
     "Logam Transisi": "#FFF3B0",
-    "Logam Lainnya": "#CDEAC0",
+    "Logam Transisi (Superberat)": "#FFF3B0",
+    "Logam Pasca-Transisi": "#CDEAC0",
+    "Logam Pasca-Transisi (Superberat)": "#CDEAC0",
     "Metaloid": "#B5EAEA",
-    "Nonlogam": "#BDE0FE",
-    "Halogen": "#D8B4FE",
+    "Non-logam": "#BDE0FE",
+    "Non-logam (Halogen)": "#D8B4FE",
     "Gas Mulia": "#F8C8DC",
     "Lantanida": "#DCC6FF",
     "Aktinida": "#F4C2E7"
@@ -865,7 +867,8 @@ else:  # Halaman Tabel Periodik
         kolom = st.columns(18) # Membagi layar menjadi 18 kolom sama besar
         for i, unsur in enumerate(baris):
             with kolom[i]:
-                if unsur != "":  
+                if unsur != "":
+                    bg_color = COLOR_MAP.get(element["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         # Jika unsur ada di dictionary, jadikan tombol yang bisa diklik
                         if st.button(unsur, use_container_width=True, type="primary"):
@@ -886,6 +889,7 @@ else:  # Halaman Tabel Periodik
         for i, unsur in enumerate(baris):
             with kolom[i]:
                 if unsur != "":
+                    bg_color = COLOR_MAP.get(element["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         if st.button(unsur, use_container_width=True, key=f"f_{unsur}", type="primary"):
                             st.session_state.unsur_terpilih = unsur
