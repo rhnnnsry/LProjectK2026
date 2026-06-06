@@ -203,6 +203,18 @@ else:  # Halaman Tabel Periodik
     st.markdown("#### 🎨 Petunjuk Kategori Unsur:")
     legend_cols = st.columns(5)
     categories = list(COLOR_MAP.keys())
+
+    for idx, cat in enumerate(categories):
+        col_idx = idx % 5
+        with legend_cols[col_idx]:
+            st.markdown(
+                f'<div style="background-color:{COLOR_MAP[cat]}; padding:6px; border-radius:8px; text-align:center; '
+                f'font-size:0.8rem; font-weight:bold; color:#4A3E56; margin-bottom:5px; border: 1px solid rgba(0,0,0,0.05);">'
+                f'{cat}</div>', 
+                unsafe_allow_html=True
+            )
+            
+    st.markdown("<br>", unsafe_allow_html=True)
     
     # --- DATASET (GOLONGAN IA & IIA) ---
     unsur_data = {
@@ -890,7 +902,8 @@ else:  # Halaman Tabel Periodik
     for idx, (simbol, data) in enumerate(unsur_data.items()):
         kategori_unsur = data["Informasi Dasar"]["Kategori"]
         warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-        with grid_cols[idx % 6]:
+        col_idx = idx % 6
+        with kolom[col_idx]:
             st.markdown(
                 f"""
                 <a href="?element={simbol}" target="_self" style="text-decoration: none;">
