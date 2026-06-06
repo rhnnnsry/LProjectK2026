@@ -62,7 +62,7 @@ st.markdown("""
         border: 1px solid #F4C2E7;
     }
 
-    /* KOTAK UNSUR TABEL PERIODIK (Aesthetic &amp; Modern) */
+    /* KOTAK UNSUR TABEL PERIODIK (Aesthetic & Modern) */
     .element-box {
         border-radius: 12px !important;
         padding: 10px !important;
@@ -276,7 +276,7 @@ def show_page_tabel_periodik():
         grid_cols = st.columns(max_group)
         
         for group in range(1, max_group + 1):
-            match = [(df['Period'] == period) &amp; (df['Group'] == group)]
+            match = df[(df['Period'] == period) & (df['Group'] == group)]
             
             with grid_cols[group - 1]:
                 if not match.empty:
