@@ -849,7 +849,10 @@ else:  # Halaman Tabel Periodik
     st.write("Klik pada unsur yang tersedia (warna dapat diklik) untuk melihat detailnya di bagian bawah.")
 
     # Menyimpan unsur yang diklik
-    if 'unsur_terpilih' not in st.session_state:
+    if "element" in st.query_params:
+        st.session_state.unsur_terpilih = st.query_params["element"]
+    
+    elif 'unsur_terpilih' not in st.session_state:
         st.session_state.unsur_terpilih = 'H'
 
     # --- LAYOUT MATRIKS TABEL PERIODIK ---
@@ -871,16 +874,50 @@ else:  # Halaman Tabel Periodik
             with kolom[i]:
                 if unsur != "":
                     if unsur in unsur_data:
+                    
                         data_unsur = unsur_data[unsur]
-                        kategori_unsur = data_unsur["Informasi Dasar"]["Kategori"]
+                        kategori_unsur = data_unsur["Informasi Dasar"].get("Kategori", "")
                         warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-    
-                        if st.button(unsur, use_container_width=True, key=f"btn_{unsur}"):
-                            st.session_state.unsur_terpilih = unsur
-                           
+        
+                        st.markdown(
+                            f"""
+                            <a href="?element={unsur}" target="_self" style="text-decoration: none;">
+                                <div style="
+                                    background-color: {warna_bg}; 
+                                    border: 1px solid rgba(0,0,0,0.1); 
+                                    border-radius: 8px; 
+                                    padding: 10px 2px; 
+                                    text-align: center; 
+                                    margin-bottom: 10px;
+                                    box-shadow: 1px 2px 5px rgba(0,0,0,0.05);
+                                    color: #333;
+                                    min-height: 80px;
+                                ">
+                                    <h3 style="margin: 0; font-size: 1.2rem;">{unsur}</h3>
+                                    <p style="margin: 0; font-size: 0.7rem; font-weight: bold;">{data_unsur['Informasi Dasar']['Nomor Atom']}</p>
+                                </div>
+                            </a>
+                            """, 
+                            unsafe_allow_html=True
+                        )
                     else:
-                        st.button(unsur, use_container_width=True, disabled=True, key=f"dis_{unsur}")
-
+                        st.markdown(
+                            f"""
+                            <div style="
+                                background-color: #E0E0E0; 
+                                border: 1px solid rgba(0,0,0,0.1); 
+                                border-radius: 8px; 
+                                padding: 10px 2px; 
+                                text-align: center; 
+                                margin-bottom: 10px;
+                                color: #999;
+                                min-height: 80px;
+                            ">
+                                <h3 style="margin: 0; font-size: 1.2rem;">{unsur}</h3>
+                            </div>
+                            """, 
+                            unsafe_allow_html=True
+                        )
 
     # Tambahan untuk Lantanida & Aktinida di bawah
     st.write("")
@@ -895,12 +932,51 @@ else:  # Halaman Tabel Periodik
             with kolom[i]:
                 if unsur != "":
                     if unsur in unsur_data:
-                        if st.button(unsur, use_container_width=True, key=f"f_btn_{unsur}"):
-                            st.session_state.unsur_terpilih = unsur
+                        data_unsur = unsur_data[unsur]
+                        kategori_unsur = data_unsur["Informasi Dasar"].get("Kategori", "")
+                        warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
+                        
+                        st.markdown(
+                            f"""
+                            <a href="?element={unsur}" target="_self" style="text-decoration: none;">
+                                <div style="
+                                    background-color: {warna_bg}; 
+                                    border: 1px solid rgba(0,0,0,0.1); 
+                                    border-radius: 8px; 
+                                    padding: 10px 2px; 
+                                    text-align: center; 
+                                    margin-bottom: 10px;
+                                    box-shadow: 1px 2px 5px rgba(0,0,0,0.05);
+                                    color: #333;
+                                    min-height: 80px;
+                                ">
+                                    <h3 style="margin: 0; font-size: 1.2rem;">{unsur}</h3>
+                                    <p style="margin: 0; font-size: 0.7rem; font-weight: bold;">{data_unsur['Informasi Dasar']['Nomor Atom']}</p>
+                                </div>
+                            </a>
+                            """, 
+                            unsafe_allow_html=True
+                        )
                     else:
-                        st.button(unsur, use_container_width=True, disabled=True, key=f"f_dis_{unsur}")
-                           
-            
+                        st.markdown(
+                            f"""
+                            <div style="
+                                background-color: #E0E0E0; 
+                                border: 1px solid rgba(0,0,0,0.1); 
+                                border-radius: 8px; 
+                                padding: 10px 2px; 
+                                text-align: center; 
+                                margin-bottom: 10px;
+                                color: #999;
+                                min-height: 80px;
+                            ">
+                                <h3 style="margin: 0; font-size: 1.2rem;">{unsur}</h3>
+                            </div>
+                            """, 
+                            unsafe_allow_html=True
+                        )
+    
+    st.markdown("---")
     # --- DETAIL UNSUR (DITAMPILKAN DI BAWAH TABEL) ---
     if st.session_state.unsur_terpilih in unsur_data:
         unsur_aktif = unsur_data[st.session_state.unsur_terpilih]
