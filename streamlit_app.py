@@ -881,7 +881,7 @@ else:  # Halaman Tabel Periodik
         
                         st.markdown(
                             f"""
-                            <a href="?menu="🔬 Tabel Periodik"&element={unsur}" target="_self" style="text-decoration: none;">
+                            <a href="?element={unsur}" target="_self" style="text-decoration: none;">
                                 <div style="
                                     background-color: {warna_bg}; 
                                     border: 1px solid rgba(0,0,0,0.1); 
