@@ -15,7 +15,7 @@ st.markdown(
 &lt;style&gt;
     /* Latar Belakang Utama Aplikasi */
     .stApp {
-        background: linear-gradient(135deg, #FFF6FB, #F3EEFF, #EAF8FF) !important;
+        background: linear-gradient(135, #FFF6FB, #F3EEFF, #EAF8FF) !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
