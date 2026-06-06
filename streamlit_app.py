@@ -866,26 +866,20 @@ else:  # Halaman Tabel Periodik
 
     # Menggambar Tabel Periodik
     for baris in grid_tabel:
-    kolom = st.columns(18)
-    for i, unsur in enumerate(baris):
-        with kolom[i]:
-            if unsur != "":
-                if unsur in unsur_data:
-                    # Ambil data HANYA untuk unsur yang sedang dicek
-                    data_unsur = unsur_data[unsur]
-                    kategori_unsur = data_unsur["Informasi Dasar"]["Kategori"]
-                    warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-
-                    # Menggunakan st.button biasa agar nyambung dengan st.session_state
-                    if st.button(unsur, use_container_width=True, key=f"btn_{unsur}"):
-                        st.session_state.unsur_terpilih = unsur
-                        
-                    # Catatan: Jika Anda TETAP ingin menggunakan desain HTML kotak-kotak,
-                    # Anda harus mengganti st.button di atas dengan st.markdown Anda, 
-                    # TAPI hapus loop `for ... in unsur_data.items()` yang lama.
-                else:
-                    # Unsur belum ada di data
-                    st.button(unsur, use_container_width=True, disabled=True, key=f"dis_{unsur}")
+        kolom = st.columns(18)
+        for i, unsur in enumerate(baris):
+            with kolom[i]:
+                if unsur != "":
+                    if unsur in unsur_data:
+                        data_unsur = unsur_data[unsur]
+                        kategori_unsur = data_unsur["Informasi Dasar"]["Kategori"]
+                        warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
+    
+                        if st.button(unsur, use_container_width=True, key=f"btn_{unsur}"):
+                            st.session_state.unsur_terpilih = unsur
+                           
+                    else:
+                        st.button(unsur, use_container_width=True, disabled=True, key=f"dis_{unsur}")
 
 
     # Tambahan untuk Lantanida & Aktinida di bawah
@@ -896,16 +890,16 @@ else:  # Halaman Tabel Periodik
         ["", "", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", ""]
     ]
     for baris in blok_f:
-    kolom = st.columns(18)
-    for i, unsur in enumerate(baris):
-        with kolom[i]:
-            if unsur != "":
-                if unsur in unsur_data:
-                    if st.button(unsur, use_container_width=True, key=f"f_btn_{unsur}"):
-                        st.session_state.unsur_terpilih = unsur
-                else:
-                    st.button(unsur, use_container_width=True, disabled=True, key=f"f_dis_{unsur}")
-                       
+        kolom = st.columns(18)
+        for i, unsur in enumerate(baris):
+            with kolom[i]:
+                if unsur != "":
+                    if unsur in unsur_data:
+                        if st.button(unsur, use_container_width=True, key=f"f_btn_{unsur}"):
+                            st.session_state.unsur_terpilih = unsur
+                    else:
+                        st.button(unsur, use_container_width=True, disabled=True, key=f"f_dis_{unsur}")
+                           
             
     # --- DETAIL UNSUR (DITAMPILKAN DI BAWAH TABEL) ---
     if st.session_state.unsur_terpilih in unsur_data:
