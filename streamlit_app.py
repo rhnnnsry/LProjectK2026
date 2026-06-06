@@ -1,5 +1,4 @@
 import streamlit as st
-import streamlit as st
 import pandas as pd
 import time
 
@@ -16,14 +15,14 @@ st.markdown('''
 <style>
     /* Latar Belakang Utama Aplikasi */
     .stApp {
-        background: linear-gradient(135, "#FFF6FB", "#F3EEFF", "#EAF8FF") !important;
+        background: linear-gradient(135deg, #FFF6FB, #F3EEFF, #EAF8FF) !important;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
     
     /* Latar Belakang Sidebar */
     [data-testid="stSidebar"] {
-        background-color: "#F4ECFF" !important;
-        border-right: 2 px dashed "#DCC6FF";
+        background-color: #F4ECFF !important;
+        border-right: 2px dashed #DCC6FF;
     }
     
     /* Gaya Teks Umum */
@@ -33,9 +32,9 @@ st.markdown('''
     
     /* Tombol Navigasi Kustom di Sidebar */
     .stSidebar nav li a {
-        border-radius: 10 px;
-        margin: 4 px 0;
-        transition: all 0.3 s ease;
+        border-radius: 10px;
+        margin: 4px 0;
+        transition: all 0.3s ease;
     }
     .stSidebar nav li a:hover {
         background-color: #EAD9FF !important;
@@ -45,35 +44,35 @@ st.markdown('''
     /* Wadah Identitas Kelompok di Beranda */
     .identity-card {
         background: rgba(255, 255, 255, 0.7);
-        border: 2 px solid #F4C2E7;
-        border-radius: 16 px;
-        padding: 20 px;
-        box-shadow: 0 4 px 15 px rgba(244, 194, 231, 0.3);
-        margin-top: 20 px;
+        border: 2px solid #F4C2E7;
+        border-radius: 16px;
+        padding: 20px;
+        box-shadow: 0 4px 15px rgba(244, 194, 231, 0.3);
+        margin-top: 20px;
     }
     
     .member-name {
         font-weight: 600;
         color: #5D4A70;
         background: #FFF0FA;
-        padding: 6 px 12 px;
-        border-radius: 20 px;
+        padding: 6px 12px;
+        border-radius: 20px;
         display: inline-block;
-        margin: 4 px;
-        border: 1 px solid #F4C2E7;
+        margin: 4px;
+        border: 1px solid #F4C2E7;
     }
 
     /* KOTAK UNSUR TABEL PERIODIK (Aesthetic & Modern) */
     .element-box {
-        border-radius: 12 px !important;
-        padding: 10 px !important;
+        border-radius: 12px !important;
+        padding: 10px !important;
         text-align: center !important;
-        box-shadow: 0 4 px 8 px rgba(0, 0, 0, 0.05) !important;
-        transition: transform 0.3 s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3 s ease !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05) !important;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
         cursor: pointer;
-        border: 1 px solid rgba(0,0,0,0.03);
-        margin-bottom: 12 px;
-        min-height: 105 px;
+        border: 1px solid rgba(0,0,0,0.03);
+        margin-bottom: 12px;
+        min-height: 105px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -83,32 +82,32 @@ st.markdown('''
     /* Efek Hover Membesar Sedikit */
     .element-box:hover {
         transform: scale(1.08) !important;
-        box-shadow: 0 8 px 16 px rgba(165, 140, 190, 0.2) !important;
+        box-shadow: 0 8px 16px rgba(165, 140, 190, 0.2) !important;
         z-index: 10;
     }
     
     .atomic-number {
-        font-size: 0.75 rem !important;
+        font-size: 0.75rem !important;
         font-weight: bold !important;
         align-self: flex-start;
         opacity: 0.7;
     }
     
     .element-symbol {
-        font-size: 1.6 rem !important;
+        font-size: 1.6rem !important;
         font-weight: 800 !important;
-        margin: -2 px 0 !important;
+        margin: -2px 0 !important;
     }
     
     .element-name {
-        font-size: 0.7 rem !important;
+        font-size: 0.7rem !important;
         font-weight: 500 !important;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         width: 100%;
     }
-<style>
+</style>
 ''', unsafe_allow_html=True)
 
 # DATA KATEGORI WARNA PASTEL
@@ -172,7 +171,7 @@ df = pd.DataFrame(elements_data)
 def trigger_loading():
     loading_placeholder = st.empty()
     with loading_placeholder.container():
-        st.markdown("&lt;br&gt;&lt;br&gt;", unsafe_allow_html=True)
+        st.markdown("<br><br>", unsafe_allow_html=True)
         cols = st.columns([1, 2, 1])
         with cols[1]:
             st.image(
@@ -229,27 +228,27 @@ def show_page_beranda():
         )
     
     st.write("---")
-    st.markdown("### 🗂️ Informasi Proyek &amp; Pengembang")
+    st.markdown("### 🗂️ Informasi Proyek & Pengembang")
     
+    # PERBAIKAN DI SINI: argumen unsafe_allow_html dikeluarkan dari string
     st.markdown('''
-        &lt;div class="identity-card"&gt;
-            &lt;h4 style='margin-top:0;'&gt;✨ Ensiklopedia Unsur Kimia&lt;/h4&gt;
-            &lt;p style='font-size: 1.05rem;'&gt;&lt;b&gt;Proyek Kelompok 13 – Politeknik AKA Bogor&lt;/b&gt;&lt;/p&gt;
-            &lt;p style='margin-bottom: 8px;'&gt;&lt;b&gt;Nama Editor / Pengembang:&lt;/b&gt;&lt;/p&gt;
-            &lt;div&gt;
-                &lt;span class="member-name"&gt;🌸 Hayu Raihanun (2560641)&lt;/span&gt;
-                &lt;span class="member-name"&gt;🌸 Niken Sri Uttari (2560727)&lt;/span&gt;
-                &lt;span class="member-name"&gt;🌸 Nisfy Sabrina Flowerridha Supriyadi (2560728)&lt;/span&gt;
-                &lt;span class="member-name"&gt;🍀 Raifan Syahdan Putra Raya (2560742)&lt;/span&gt;
-            &lt;/div&gt;
-            &lt;p style='margin-top:15px; font-size:0.85rem; opacity:0.8;'&gt;🔬 &lt;i&gt;Dibuat dengan dedikasi penuh untuk praktikum komputasi kimia di Kampus Politeknik AKA Bogor.&lt;/i&gt;&lt;/p&gt;
-        &lt;/div&gt;
-        unsafe_allow_html=True
-    ''')
+        <div class="identity-card">
+            <h4 style='margin-top:0;'>✨ Ensiklopedia Unsur Kimia</h4>
+            <p style='font-size: 1.05rem;'><b>Proyek Kelompok 13 – Politeknik AKA Bogor</b></p>
+            <p style='margin-bottom: 8px;'><b>Nama Editor / Pengembang:</b></p>
+            <div>
+                <span class="member-name">🌸 Hayu Raihanun (2560641)</span>
+                <span class="member-name">🌸 Niken Sri Uttari (2560727)</span>
+                <span class="member-name">🌸 Nisfy Sabrina Flowerridha Supriyadi (2560728)</span>
+                <span class="member-name">🍀 Raifan Syahdan Putra Raya (2560742)</span>
+            </div>
+            <p style='margin-top:15px; font-size:0.85rem; opacity:0.8;'>🔬 <i>Dibuat dengan dedikasi penuh untuk praktikum komputasi kimia di Kampus Politeknik AKA Bogor.</i></p>
+        </div>
+    ''', unsafe_allow_html=True)
 
 def show_page_tabel_periodik():
     st.markdown("# 🧪 Tabel Periodik Unsur ✨")
-    st.markdown("### *Klik &amp; jelajahi blok unsur pastel kawaii chemistry kamu 💖🔬*")
+    st.markdown("### *Klik & jelajahi blok unsur pastel kawaii chemistry kamu 💖🔬*")
     st.write("---")
     
     st.markdown("#### 🎨 Petunjuk Kategori Unsur:")
@@ -260,13 +259,13 @@ def show_page_tabel_periodik():
         col_idx = idx % 5
         with legend_cols[col_idx]:
             st.markdown(
-                f'&lt;div style="background-color:{COLOR_MAP[cat]}; padding:6px; border-radius:8px; text-align:center; '
-                f'font-size:0.8rem; font-weight:bold; color:#4A3E56; margin-bottom:5px; border: 1px solid rgba(0,0,0,0.05);"&gt;'
-                f'{cat}&lt;/div&gt;', 
+                f'<div style="background-color:{COLOR_MAP[cat]}; padding:6px; border-radius:8px; text-align:center; '
+                f'font-size:0.8rem; font-weight:bold; color:#4A3E56; margin-bottom:5px; border: 1px solid rgba(0,0,0,0.05);">'
+                f'{cat}</div>', 
                 unsafe_allow_html=True
             )
             
-    st.write("&lt;br&gt;", unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
     
     max_period = int(df['Period'].max())
     max_group = 18
@@ -282,27 +281,27 @@ def show_page_tabel_periodik():
                     element = match.iloc[0]
                     bg_color = COLOR_MAP.get(element['Category'], '#FFFFFF')
                     
+                    # PERBAIKAN DI SINI: pakai kurung siku biasa untuk HTML, bukan entitas &lt;
                     box_html = f"""
-                    &lt;div class="element-box" style="background-color: {bg_color};"&gt;
-                        &lt;div class="atomic-number"&gt;{element['AtomicNumber']}&lt;/div&gt;
-                        &lt;div class="element-symbol"&gt;{element['Symbol']}&lt;/div&gt;
-                        &lt;div class="element-name"&gt;{element['Name']}&lt;/div&gt;
-                    &lt;/div&gt;
+                    <div class="element-box" style="background-color: {bg_color};">
+                        <div class="atomic-number">{element['AtomicNumber']}</div>
+                        <div class="element-symbol">{element['Symbol']}</div>
+                        <div class="element-name">{element['Name']}</div>
+                    </div>
                     """
-                    # Diganti ke st.markdown agar aman di versi lama
                     st.markdown(box_html, unsafe_allow_html=True)
                 else:
                     st.write("")
 
     st.markdown(
-        "&lt;center style='margin-top: 30px; font-size: 1.5rem;'&gt;"
+        "<center style='margin-top: 30px; font-size: 1.5rem;'>"
         "✨ ☁️ 💖 🧪 🔬 💖 ☁️ ✨"
-        "&lt;/center&gt;", 
+        "</center>", 
         unsafe_allow_html=True
     )
 
 # ==============================================================================
-# SISTEM KONTROL NAVIGASI MULTI-HALAMAN &amp; SIDEBAR
+# SISTEM KONTROL NAVIGASI MULTI-HALAMAN & SIDEBAR
 # ==============================================================================
 st.sidebar.markdown("### 🧭 MENU NAVIGASI")
 st.sidebar.markdown("✨ *Kawaii Chem Lab V.2026* ✨")
