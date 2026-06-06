@@ -866,41 +866,27 @@ else:  # Halaman Tabel Periodik
 
     # Menggambar Tabel Periodik
     for baris in grid_tabel:
-        kolom = st.columns(18) # Membagi layar menjadi 18 kolom sama besar
-        for i, unsur in enumerate(baris):
-            with kolom[i]:
-                if unsur != "":
-                    if unsur in unsur_data:
-                        # Jika unsur ada di dictionary, jadikan tombol yang bisa diklik
-                        if st.button(unsur, use_container_width=True, type="primary"):
-                            st.session_state.unsur_terpilih = unsur
-                    else:
-                        # Jika unsur belum ditambahkan, buat tombol menjadi "disabled" (abu-abu)
-                        st.button(unsur, use_container_width=True, disabled=True)
-                for idx, (simbol, data) in enumerate(unsur_data.items()):
-                    kategori_unsur = data["Informasi Dasar"]["Kategori"]
+    kolom = st.columns(18)
+    for i, unsur in enumerate(baris):
+        with kolom[i]:
+            if unsur != "":
+                if unsur in unsur_data:
+                    # Ambil data HANYA untuk unsur yang sedang dicek
+                    data_unsur = unsur_data[unsur]
+                    kategori_unsur = data_unsur["Informasi Dasar"]["Kategori"]
                     warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-                    st.markdown(
-                        f"""
-                        <a href="?element={simbol}" target="_self" style="text-decoration: none;">
-                            <div style="
-                                background-color: {warna_bg}; 
-                                border: 2px solid rgba(0,0,0,0.1); 
-                                border-radius: 12px; 
-                                padding: 15px; 
-                                text-align: center; 
-                                margin-bottom: 15px;
-                                box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
-                                color: #4A3E56;
-                            ">
-                                <h2 style="margin: 0; font-size: 2rem;">{simbol}</h2>
-                                <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">{data['Informasi Dasar']['Nomor Atom']}</p>
-                                <p style="margin: 0; font-size: 0.75rem; opacity: 0.8;">{data['Informasi Dasar']['Nama']}</p>
-                            </div>
-                        </a>
-                        """, 
-                        unsafe_allow_html=True
-                    )
+
+                    # Menggunakan st.button biasa agar nyambung dengan st.session_state
+                    if st.button(unsur, use_container_width=True, key=f"btn_{unsur}"):
+                        st.session_state.unsur_terpilih = unsur
+                        
+                    # Catatan: Jika Anda TETAP ingin menggunakan desain HTML kotak-kotak,
+                    # Anda harus mengganti st.button di atas dengan st.markdown Anda, 
+                    # TAPI hapus loop `for ... in unsur_data.items()` yang lama.
+                else:
+                    # Unsur belum ada di data
+                    st.button(unsur, use_container_width=True, disabled=True, key=f"dis_{unsur}")
+
 
     # Tambahan untuk Lantanida & Aktinida di bawah
     st.write("")
@@ -910,42 +896,16 @@ else:  # Halaman Tabel Periodik
         ["", "", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", ""]
     ]
     for baris in blok_f:
-        kolom = st.columns(18)
-        for i, unsur in enumerate(baris):
-            with kolom[i]:
-                if unsur != "":
-                    if unsur in unsur_data:
-                        if st.button(unsur, use_container_width=True, key=f"f_{unsur}", type="primary"):
-                            st.session_state.unsur_terpilih = unsur
-                    else:
-                        st.button(unsur, use_container_width=True, disabled=True, key=f"f_{unsur}")
-                for idx, (simbol, data) in enumerate(unsur_data.items()):
-                    kategori_unsur = data["Informasi Dasar"]["Kategori"]
-                    warna_bg = COLOR_MAP.get(kategori_unsur, "#FFFFFF")
-                    st.markdown(
-                        f"""
-                        <a href="?element={simbol}" target="_self" style="text-decoration: none;">
-                            <div style="
-                                background-color: {warna_bg}; 
-                                border: 2px solid rgba(0,0,0,0.1); 
-                                border-radius: 12px; 
-                                padding: 15px; 
-                                text-align: center; 
-                                margin-bottom: 15px;
-                                box-shadow: 2px 4px 10px rgba(0,0,0,0.05);
-                                color: #4A3E56;
-                            ">
-                                <h2 style="margin: 0; font-size: 2rem;">{simbol}</h2>
-                                <p style="margin: 0; font-size: 0.9rem; font-weight: bold;">{data['Informasi Dasar']['Nomor Atom']}</p>
-                                <p style="margin: 0; font-size: 0.75rem; opacity: 0.8;">{data['Informasi Dasar']['Nama']}</p>
-                            </div>
-                        </a>
-                        """, 
-                        unsafe_allow_html=True
-                    )
-
-    st.markdown("---")
-    
+    kolom = st.columns(18)
+    for i, unsur in enumerate(baris):
+        with kolom[i]:
+            if unsur != "":
+                if unsur in unsur_data:
+                    if st.button(unsur, use_container_width=True, key=f"f_btn_{unsur}"):
+                        st.session_state.unsur_terpilih = unsur
+                else:
+                    st.button(unsur, use_container_width=True, disabled=True, key=f"f_dis_{unsur}")
+                       
             
     # --- DETAIL UNSUR (DITAMPILKAN DI BAWAH TABEL) ---
     if st.session_state.unsur_terpilih in unsur_data:
