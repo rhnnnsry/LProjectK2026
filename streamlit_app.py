@@ -13,6 +13,26 @@ st.set_page_config(
 # Custom CSS
 st.markdown('''
 <style>
+    /* GAYA TOMBOL TABEL PERIODIK NATIVE STREAMLIT */
+    div[data-testid="stButton"] button {
+        height: 70px;
+        border-radius: 12px;
+        font-size: 1.5rem !important;
+        font-weight: 800 !important;
+        border: 2px solid rgba(0,0,0,0.05);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    div[data-testid="stButton"] button:hover {
+        transform: scale(1.1);
+        border-color: #F4C2E7;
+        color: #F4C2E7;
+        box-shadow: 0 8px 16px rgba(165, 140, 190, 0.2);
+    }
+    /* Mematikan p paragraf agar simbol berada di tengah tombol */
+    div[data-testid="stButton"] button p {
+        font-size: 1.5rem;
+        margin: 0;
+    }
     /* Latar Belakang Utama Aplikasi */
     .stApp {
         background: linear-gradient(135deg, #FFF6FB, #F3EEFF, #EAF8FF) !important;
@@ -246,9 +266,47 @@ def show_page_beranda():
         </div>
     ''', unsafe_allow_html=True)
 
+# ==============================================================================
+# FUNGSI POP-UP (MODAL) DETAIL UNSUR
+# ==============================================================================
+@st.dialog("✨ Informasi Detail Unsur")
+def show_element_details(element):
+    # Ambil warna dari COLOR_MAP
+    bg_color = COLOR_MAP.get(element['Category'], '#FFFFFF')
+    
+    # Header Pop-up dengan warna pastel kategori
+    st.markdown(
+        f"""
+        <div style="background-color: {bg_color}; padding: 20px; border-radius: 15px; text-align: center; border: 2px dashed #DCC6FF; margin-bottom: 20px;">
+            <h1 style="font-size: 4rem; margin: 0; color: #4A3E56 !important;">{element['Symbol']}</h1>
+            <h3 style="margin: 0; color: #4A3E56 !important;">{element['Name']}</h3>
+        </div>
+        """, unsafe_allow_html=True
+    )
+    
+    # Layout Data
+    col1, col2 = st.columns(2)
+    with col1:
+        st.write(f"**🧬 Nomor Atom:** {element['AtomicNumber']}")
+        st.write(f"**🏷️ Kategori:** {element['Category']}")
+    with col2:
+        st.write(f"**📏 Golongan:** {element['Group']}")
+        st.write(f"**📅 Periode:** {element['Period']}")
+        
+    # Paragraf Penjelasan (Kamu bisa mengubah teks ini sesuai kebutuhan)
+    st.info(
+        f"**{element['Name']}** ({element['Symbol']}) adalah unsur kimia dengan nomor atom **{element['AtomicNumber']}** "
+        f"yang terletak pada periode {element['Period']} dan golongan {element['Group']}. "
+        f"Unsur ini diklasifikasikan ke dalam kelompok **{element['Category']}**."
+    )
+
+
+# ==============================================================================
+# HALAMAN TABEL PERIODIK
+# ==============================================================================
 def show_page_tabel_periodik():
     st.markdown("# 🧪 Tabel Periodik Unsur ✨")
-    st.markdown("### *Klik & jelajahi blok unsur pastel kawaii chemistry kamu 💖🔬*")
+    st.markdown("### *Klik simbol unsur untuk melihat penjelasan lengkapnya 💖🔬*")
     st.write("---")
     
     st.markdown("#### 🎨 Petunjuk Kategori Unsur:")
@@ -279,18 +337,13 @@ def show_page_tabel_periodik():
             with grid_cols[group - 1]:
                 if not match.empty:
                     element = match.iloc[0]
-                    bg_color = COLOR_MAP.get(element['Category'], '#FFFFFF')
                     
-                    # PERBAIKAN DI SINI: pakai kurung siku biasa untuk HTML, bukan entitas &lt;
-                    box_html = f"""
-                    <div class="element-box" style="background-color: {bg_color};">
-                        <div class="atomic-number">{element['AtomicNumber']}</div>
-                        <div class="element-symbol">{element['Symbol']}</div>
-                        <div class="element-name">{element['Name']}</div>
-                    </div>
-                    """
-                    st.markdown(box_html, unsafe_allow_html=True)
+                    # Menggunakan native st.button agar bisa diklik
+                    # Saat diklik, panggil fungsi show_element_details
+                    if st.button(element['Symbol'], key=f"btn_{element['Symbol']}", use_container_width=True):
+                        show_element_details(element)
                 else:
+                    # Tempat kosong untuk menjaga layout tabel
                     st.write("")
 
     st.markdown(
@@ -299,7 +352,6 @@ def show_page_tabel_periodik():
         "</center>", 
         unsafe_allow_html=True
     )
-
 # ==============================================================================
 # SISTEM KONTROL NAVIGASI MULTI-HALAMAN & SIDEBAR
 # ==============================================================================
