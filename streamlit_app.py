@@ -69,7 +69,7 @@ st.markdown(
         padding: 10 px !important;
         text-align: center !important;
         box-shadow: 0 4 px 8 px rgba(0, 0, 0, 0.05) !important;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3 s ease !important;
+        transition: transform 0.3 s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3 s ease !important;
         cursor: pointer;
         border: 1 px solid rgba(0,0,0,0.03);
         margin-bottom: 12px;
