@@ -13,26 +13,6 @@ st.set_page_config(
 # Custom CSS
 st.markdown('''
 <style>
-    /* GAYA TOMBOL TABEL PERIODIK NATIVE STREAMLIT */
-    div[data-testid="stButton"] button {
-        height: 70px;
-        border-radius: 12px;
-        font-size: 1.5rem !important;
-        font-weight: 800 !important;
-        border: 2px solid rgba(0,0,0,0.05);
-        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    div[data-testid="stButton"] button:hover {
-        transform: scale(1.1);
-        border-color: #F4C2E7;
-        color: #F4C2E7;
-        box-shadow: 0 8px 16px rgba(165, 140, 190, 0.2);
-    }
-    /* Mematikan p paragraf agar simbol berada di tengah tombol */
-    div[data-testid="stButton"] button p {
-        font-size: 1.5rem;
-        margin: 0;
-    }
     /* Latar Belakang Utama Aplikasi */
     .stApp {
         background: linear-gradient(135deg, #FFF6FB, #F3EEFF, #EAF8FF) !important;
