@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # Custom CSS
-st.markdown("""
+st.markdown(
 &lt;style&gt;
     /* Latar Belakang Utama Aplikasi */
     .stApp {
@@ -108,7 +108,7 @@ st.markdown("""
         width: 100%;
     }
 &lt;/style&gt;
-""", unsafe_allow_html=True)
+unsafe_allow_html=True)
 
 # DATA KATEGORI WARNA PASTEL
 COLOR_MAP = {
@@ -231,7 +231,6 @@ def show_page_beranda():
     st.markdown("### 🗂️ Informasi Proyek &amp; Pengembang")
     
     st.markdown(
-        """
         &lt;div class="identity-card"&gt;
             &lt;h4 style='margin-top:0;'&gt;✨ Ensiklopedia Unsur Kimia&lt;/h4&gt;
             &lt;p style='font-size: 1.05rem;'&gt;&lt;b&gt;Proyek Kelompok 13 – Politeknik AKA Bogor&lt;/b&gt;&lt;/p&gt;
@@ -244,7 +243,6 @@ def show_page_beranda():
             &lt;/div&gt;
             &lt;p style='margin-top:15px; font-size:0.85rem; opacity:0.8;'&gt;🔬 &lt;i&gt;Dibuat dengan dedikasi penuh untuk praktikum komputasi kimia di Kampus Politeknik AKA Bogor.&lt;/i&gt;&lt;/p&gt;
         &lt;/div&gt;
-        """, 
         unsafe_allow_html=True
     )
 
