@@ -158,7 +158,6 @@ elif halaman == "👥 Profil Tim":
             <div style="background: linear-gradient(135deg, #fff5f9, #f0e8f8); border: 2px solid #ffb6d9; border-radius: 10px; padding: 20px; margin: 10px 0;">
                 <h3 style="color: #ff6b9d; margin-top: 0;">{member['nama']}</h3>
                 <p style="color: #7209b7; font-weight: bold; margin: 5px 0;">NIM: {member['nim']}</p>
-                <p style="color: #c44569; margin: 0;">📍 {member['peran']}</p>
             </div>
             """, unsafe_allow_html=True)
     
