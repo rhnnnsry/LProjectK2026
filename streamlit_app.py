@@ -22,7 +22,7 @@ st.markdown(
     /* Latar Belakang Sidebar */
     [data-testid="stSidebar"] {
         background-color: "#F4ECFF" !important;
-        border-right: 2px dashed "#DCC6FF";
+        border-right: 2 px dashed "#DCC6FF";
     }
     
     /* Gaya Teks Umum */
@@ -32,8 +32,8 @@ st.markdown(
     
     /* Tombol Navigasi Kustom di Sidebar */
     .stSidebar nav li a {
-        border-radius: 10px;
-        margin: 4px 0;
+        border-radius: 10 px;
+        margin: 4 px 0;
         transition: all 0.3s ease;
     }
     .stSidebar nav li a:hover {
@@ -44,33 +44,33 @@ st.markdown(
     /* Wadah Identitas Kelompok di Beranda */
     .identity-card {
         background: rgba(255, 255, 255, 0.7);
-        border: 2px solid #F4C2E7;
-        border-radius: 16px;
-        padding: 20px;
-        box-shadow: 0 4px 15px rgba(244, 194, 231, 0.3);
-        margin-top: 20px;
+        border: 2 px solid #F4C2E7;
+        border-radius: 16 px;
+        padding: 20 px;
+        box-shadow: 0 4 px 15 px rgba(244, 194, 231, 0.3);
+        margin-top: 20 px;
     }
     
     .member-name {
         font-weight: 600;
         color: #5D4A70;
         background: #FFF0FA;
-        padding: 6px 12px;
-        border-radius: 20px;
+        padding: 6 px 12 px;
+        border-radius: 20 px;
         display: inline-block;
-        margin: 4px;
-        border: 1px solid #F4C2E7;
+        margin: 4 px;
+        border: 1 px solid #F4C2E7;
     }
 
     /* KOTAK UNSUR TABEL PERIODIK (Aesthetic & Modern) */
     .element-box {
-        border-radius: 12px !important;
-        padding: 10px !important;
+        border-radius: 12 px !important;
+        padding: 10 px !important;
         text-align: center !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05) !important;
-        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease !important;
+        box-shadow: 0 4 px 8 px rgba(0, 0, 0, 0.05) !important;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3 s ease !important;
         cursor: pointer;
-        border: 1px solid rgba(0,0,0,0.03);
+        border: 1 px solid rgba(0,0,0,0.03);
         margin-bottom: 12px;
         min-height: 105px;
         display: flex;
@@ -82,7 +82,7 @@ st.markdown(
     /* Efek Hover Membesar Sedikit */
     .element-box:hover {
         transform: scale(1.08) !important;
-        box-shadow: 0 8px 16px rgba(165, 140, 190, 0.2) !important;
+        box-shadow: 0 8 px 16 px rgba(165, 140, 190, 0.2) !important;
         z-index: 10;
     }
     
@@ -94,13 +94,13 @@ st.markdown(
     }
     
     .element-symbol {
-        font-size: 1.6rem !important;
+        font-size: 1.6 rem !important;
         font-weight: 800 !important;
-        margin: -2px 0 !important;
+        margin: -2 px 0 !important;
     }
     
     .element-name {
-        font-size: 0.7rem !important;
+        font-size: 0.7 rem !important;
         font-weight: 500 !important;
         text-overflow: ellipsis;
         white-space: nowrap;
