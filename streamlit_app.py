@@ -868,7 +868,7 @@ else:  # Halaman Tabel Periodik
         for i, unsur in enumerate(baris):
             with kolom[i]:
                 if unsur != "":
-                    bg_color = COLOR_MAP.get(element["Kategori"], "#FFFFFF")
+                    bg_color = COLOR_MAP.get(unsur["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         # Jika unsur ada di dictionary, jadikan tombol yang bisa diklik
                         if st.button(unsur, use_container_width=True, type="primary"):
@@ -889,7 +889,7 @@ else:  # Halaman Tabel Periodik
         for i, unsur in enumerate(baris):
             with kolom[i]:
                 if unsur != "":
-                    bg_color = COLOR_MAP.get(element["Kategori"], "#FFFFFF")
+                    bg_color = COLOR_MAP.get(unsur["Kategori"], "#FFFFFF")
                     if unsur in unsur_data:
                         if st.button(unsur, use_container_width=True, key=f"f_{unsur}", type="primary"):
                             st.session_state.unsur_terpilih = unsur
