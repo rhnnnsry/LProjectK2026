@@ -12,7 +12,7 @@ st.set_page_config(
 )
 
 # Custom CSS
-st.markdown(
+st.markdown('''
 <style>
     /* Latar Belakang Utama Aplikasi */
     .stApp {
@@ -109,7 +109,7 @@ st.markdown(
         width: 100%;
     }
 <style>
-unsafe_allow_html=True)
+''', unsafe_allow_html=True)
 
 # DATA KATEGORI WARNA PASTEL
 COLOR_MAP = {
