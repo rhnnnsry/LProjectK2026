@@ -1,6 +1,7 @@
 import streamlit as st
 import streamlit as st
 import pandas as pd
+import time
 
 # Konfigurasi halaman
 st.set_page_config(
@@ -34,7 +35,7 @@ st.markdown(
     .stSidebar nav li a {
         border-radius: 10 px;
         margin: 4 px 0;
-        transition: all 0.3s ease;
+        transition: all 0.3 s ease;
     }
     .stSidebar nav li a:hover {
         background-color: #EAD9FF !important;
