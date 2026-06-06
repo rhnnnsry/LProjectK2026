@@ -62,6 +62,20 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# ========== DATA KATEGORI WARNA PASTEL ===========
+COLOR_MAP = {
+    "Logam Alkali": "#FFB6C1",
+    "Logam Alkali Tanah": "#FFD6A5",
+    "Logam Transisi": "#FFF3B0",
+    "Logam Lainnya": "#CDEAC0",
+    "Metaloid": "#B5EAEA",
+    "Nonlogam": "#BDE0FE",
+    "Halogen": "#D8B4FE",
+    "Gas Mulia": "#F8C8DC",
+    "Lantanida": "#DCC6FF",
+    "Aktinida": "#F4C2E7"
+}
+
 # ============ SIDEBAR NAVIGASI ============
 with st.sidebar:
     st.markdown("""
@@ -184,6 +198,20 @@ else:  # Halaman Tabel Periodik
     st.markdown('<p class="main-title">🔬 Tabel Periodik Unsur Kimia</p>', unsafe_allow_html=True)
     st.markdown('<p class="subtitle">Klik pada unsur untuk melihat detail lengkap</p>', unsafe_allow_html=True)
 
+    st.markdown("#### 🎨 Petunjuk Kategori Unsur:")
+    legend_cols = st.columns(5)
+    categories = list(COLOR_MAP.keys())
+    
+    for idx, cat in enumerate(categories):
+        col_idx = idx % 5
+        with legend_cols[col_idx]:
+            st.markdown(
+                f'<div style="background-color:{COLOR_MAP[cat]}; padding:6px; border-radius:8px; text-align:center; '
+                f'font-size:0.8rem; font-weight:bold; color:#4A3E56; margin-bottom:5px; border: 1px solid rgba(0,0,0,0.05);">'
+                f'{cat}</div>', 
+                unsafe_allow_html=True
+            )
+            
     # --- DATASET (GOLONGAN IA & IIA) ---
     unsur_data = {
         # GOLONGAN IA
