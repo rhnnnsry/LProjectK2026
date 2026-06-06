@@ -72,8 +72,8 @@ st.markdown(
         transition: transform 0.3 s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3 s ease !important;
         cursor: pointer;
         border: 1 px solid rgba(0,0,0,0.03);
-        margin-bottom: 12px;
-        min-height: 105px;
+        margin-bottom: 12 px;
+        min-height: 105 px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -88,7 +88,7 @@ st.markdown(
     }
     
     .atomic-number {
-        font-size: 0.75rem !important;
+        font-size: 0.75 rem !important;
         font-weight: bold !important;
         align-self: flex-start;
         opacity: 0.7;
