@@ -15,6 +15,8 @@ st.set_page_config(
 # ==============================================================================
 if "element" in st.query_params:
     st.session_state.active_element = st.query_params["element"]
+    # KUNCI PERBAIKAN 1: Paksa memori aplikasi untuk tetap di halaman Tabel Periodik!
+    st.session_state.current_page = "🧪 Tabel Periodik"
     # Bersihkan URL secara instan agar pop-up tidak muncul berulang kali saat refresh
     st.query_params.clear()
 
@@ -352,17 +354,26 @@ def show_page_tabel_periodik():
     )
 
 # ==============================================================================
-# SISTEM KONTROL NAVIGASI MULTI-HALAMAN & SIDEBAR
-# ==============================================================================
+# SISTEM KONTROL NAVIGASI SIDEBAR
+# =============================================================================='''''''''''''''
 st.sidebar.markdown("### 🧭 MENU NAVIGASI")
 st.sidebar.markdown("✨ *Kawaii Chem Lab V.2026* ✨")
+
+# Daftar halaman
+pages = ["🏠 Beranda", "🧪 Tabel Periodik"]
 
 if "current_page" not in st.session_state:
     st.session_state.current_page = "🏠 Beranda"
 
+try:
+    default_index = pages.index(st.session_state.current_page)
+except ValueError:
+    default_index = 0
+
 page_selection = st.sidebar.radio(
     "Pilih Halaman:",
-    ["🏠 Beranda", "🧪 Tabel Periodik"],
+    pages,
+    index=default_index,
     label_visibility="collapsed"
 )
 
@@ -374,13 +385,13 @@ st.sidebar.write("---")
 st.sidebar.markdown("#### 🔬 Kelompok 13 - AKA")
 st.sidebar.caption("• Hayu Raihanun\n• Niken Sri U.\n• Nisfy Sabrina F.S.\n• Raifan Syahdan P.R.")
 
-if page_selection == "🏠 Beranda":
+if st.session_state.current_page == "🏠 Beranda":
     show_page_beranda()
-elif page_selection == "🧪 Tabel Periodik":
+elif st.session_state.current_page == "🧪 Tabel Periodik":
     show_page_tabel_periodik()
-
+    
 # ==============================================================================
-# PEMICU POP-UP DIALOG (Dieksekusi di akhir agar muncul di atas segalanya)
+# POP-UP
 # ==============================================================================
 if "active_element" in st.session_state and st.session_state.active_element:
     selected_symbol = st.session_state.active_element
